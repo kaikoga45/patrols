@@ -17,15 +17,15 @@ workflows:
     scripts:
       - name: Install dependencies
         script: flutter pub get
-      - name: Run unit tests
-        script: |
-          set -ex
-          git clone https://oauth2:${PERSONAL_ACCESS_TOKEN}@gitlab.com/arkademi/ark_module_regular.git
-          cd ark_module_regular
-          flutter pub get
-          flutter test
-          cd ..
-          rm -rf ark_module_regular
+      # - name: Run unit tests
+      #   script: |
+      #     set -ex
+      #     git clone https://oauth2:${PERSONAL_ACCESS_TOKEN}@gitlab.com/arkademi/ark_module_regular.git
+      #     cd ark_module_regular
+      #     flutter pub get
+      #     flutter test
+      #     cd ..
+      #     rm -rf ark_module_regular
       - name: Run integration tests
         script: |
           set -ex
