@@ -35,6 +35,7 @@ workflows:
           patrol build android 
           echo $GCLOUD_FIREBASE_ADMINSDK > gcloud-firebase-adminsdk.json
           gcloud auth activate-service-account --key-file=gcloud-firebase-adminsdk.json
+          gcloud --quiet config set project $FIREBASE_PROJECT_ID
           gcloud firebase test android run \
           --type instrumentation \
           --app build/app/outputs/apk/debug/app-debug.apk \
