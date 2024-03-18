@@ -11,7 +11,7 @@ workflows:
       events:
         - push
       branch_patterns:
-        - pattern: "release/*"
+        - pattern: 'release/*'
       cancel_previous_builds: false
     scripts:
       - name: Install dependencies
