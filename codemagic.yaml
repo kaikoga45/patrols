@@ -31,7 +31,7 @@ workflows:
       - name: Run integration tests
         script: |
           set -ex
-          flutter build apk || true
+          flutter build apk --config-only
           patrol build android 
           echo $GCLOUD_FIREBASE_ADMINSDK > gcloud-firebase-adminsdk.json
           gcloud auth activate-service-account --key-file=gcloud-firebase-adminsdk.json
