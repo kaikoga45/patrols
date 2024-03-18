@@ -12,7 +12,6 @@ workflows:
         - push
       branch_patterns:
         - pattern: release/*
-          include: true
       cancel_previous_builds: false
     scripts:
       - name: Install dependencies
