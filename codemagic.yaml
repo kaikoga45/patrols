@@ -26,7 +26,7 @@ workflows:
       - name: Run integration tests
         script: |
           set -ex
-          flutter pub global activate patrol@2.2.2
+          flutter pub global activate patrol 2.2.2
           patrol build android 
           echo $GCLOUD_FIREBASE_ADMINSDK > gcloud-firebase-adminsdk.json
           gcloud auth activate-service-account --key-file=gcloud-firebase-adminsdk.json
