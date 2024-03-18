@@ -47,3 +47,13 @@ workflows:
       #     --test build/app/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
       #     --device model=redfin \
       #     --timeout 20m
+    # publishing:
+    #   email:
+    #     recipients:
+    #       - "angga.arkademi@gmail.com"
+    #       - "kai.arkademi@gmail.com"
+    #       - "nico.arkademi@gmail.com"
+    #       - "listyo.arkademi@gmail.com"
+    #     notify:
+    #       success: true
+    #       failure: true
