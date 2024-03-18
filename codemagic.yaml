@@ -18,6 +18,7 @@ workflows:
       - name: Display flutter build command
         script: |
           flutter build apk -h
+          flutter --version
       # - name: Install dependencies
       #   script: |
       #     flutter pub get
