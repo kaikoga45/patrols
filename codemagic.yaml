@@ -17,7 +17,7 @@ workflows:
     scripts:
       - name: Display flutter build command
         script: |
-          echo "flutter build apk -h"
+          flutter build apk -h
       # - name: Install dependencies
       #   script: |
       #     flutter pub get
