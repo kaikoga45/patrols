@@ -7,6 +7,7 @@ workflows:
       groups:
         - google_cloud_credentials
         - gitlab_credentials
+        - firebase_credentials
     triggering:
       events:
         - push
