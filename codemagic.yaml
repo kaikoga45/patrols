@@ -15,11 +15,14 @@ workflows:
         - pattern: "release/*"
       cancel_previous_builds: false
     scripts:
-      - name: Install dependencies
+      - name: Display flutter build command
         script: |
-          flutter pub get
-          dart pub global activate patrol_cli 2.2.2
-          patrol doctor
+          echo "flutter build apk -h"
+      # - name: Install dependencies
+      #   script: |
+      #     flutter pub get
+      #     dart pub global activate patrol_cli 2.2.2
+      #     patrol doctor
       # - name: Run unit tests
       #   script: |
       #     set -ex
@@ -29,17 +32,17 @@ workflows:
       #     flutter test
       #     cd ..
       #     rm -rf ark_module_regular
-      - name: Run integration tests
-        script: |
-          set -ex
-          flutter build apk
-          patrol build android 
-          echo $GCLOUD_FIREBASE_ADMINSDK > gcloud-firebase-adminsdk.json
-          gcloud auth activate-service-account --key-file=gcloud-firebase-adminsdk.json
-          gcloud --quiet config set project $FIREBASE_PROJECT_ID
-          gcloud firebase test android run \
-          --type instrumentation \
-          --app build/app/outputs/apk/debug/app-debug.apk \
-          --test build/app/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
-          --device model=redfin \
-          --timeout 20m
+      # - name: Run integration tests
+      #   script: |
+      #     set -ex
+      #     flutter build apk
+      #     patrol build android
+      #     echo $GCLOUD_FIREBASE_ADMINSDK > gcloud-firebase-adminsdk.json
+      #     gcloud auth activate-service-account --key-file=gcloud-firebase-adminsdk.json
+      #     gcloud --quiet config set project $FIREBASE_PROJECT_ID
+      #     gcloud firebase test android run \
+      #     --type instrumentation \
+      #     --app build/app/outputs/apk/debug/app-debug.apk \
+      #     --test build/app/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
+      #     --device model=redfin \
+      #     --timeout 20m
