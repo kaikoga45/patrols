@@ -11,7 +11,7 @@ workflows:
       events:
         - push
       branch_patterns:
-        - pattern: 'release/*'
+        - pattern: "release/*"
       cancel_previous_builds: false
     scripts:
       - name: Install dependencies
@@ -28,8 +28,7 @@ workflows:
       - name: Run integration tests
         script: |
           set -ex
-          dart pub global activate patrol 2.2.2
-          export PATH="$HOME/.pub-cache"
+          dart pub global activate patrol_cli 2.2.2
           patrol build android 
           echo $GCLOUD_FIREBASE_ADMINSDK > gcloud-firebase-adminsdk.json
           gcloud auth activate-service-account --key-file=gcloud-firebase-adminsdk.json
