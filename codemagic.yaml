@@ -15,7 +15,10 @@ workflows:
       cancel_previous_builds: false
     scripts:
       - name: Install dependencies
-        script: flutter pub get
+        script: |
+          flutter pub get
+          dart pub global activate patrol_cli 2.2.2
+          patrol doctor
       # - name: Run unit tests
       #   script: |
       #     set -ex
@@ -28,7 +31,7 @@ workflows:
       - name: Run integration tests
         script: |
           set -ex
-          dart pub global activate patrol_cli 2.2.2
+          flutter build apk || true
           patrol build android 
           echo $GCLOUD_FIREBASE_ADMINSDK > gcloud-firebase-adminsdk.json
           gcloud auth activate-service-account --key-file=gcloud-firebase-adminsdk.json
