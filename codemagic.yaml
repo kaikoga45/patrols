@@ -1,0 +1,45 @@
+workflows:
+  release-workflows:
+    name: Release Workflows
+    instance_type: mac_mini_m1
+    environment:
+      flutter: 3.7.12
+      groups:
+        - google_cloud_credentials
+        - gitlab_credentials
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: "release/*"
+          include: true
+          source: true
+      cancel_previous_builds: false
+    scripts:
+      - name: Install dependencies
+        script: flutter pub get
+      - name: Install patrol package
+        script: |
+          set -ex
+          flutter pub global activate patrol
+      - name: Run unit tests
+        script: |
+          set -ex
+          git clone https://oauth2:${PERSONAL_ACCESS_TOKEN}@gitlab.com/arkademi/ark_module_regular.git
+          cd ark_module_regular
+          flutter pub get
+          flutter test
+          cd ..
+          rm -rf ark_module_regular
+      - name: Run integration tests
+        script: |
+          set -ex
+          patrol build android 
+          echo $GCLOUD_FIREBASE_ADMINSDK > gcloud-firebase-adminsdk.json
+          gcloud auth activate-service-account --key-file=gcloud-firebase-adminsdk.json
+          gcloud firebase test android run \
+          --type instrumentation \
+          --app build/app/outputs/apk/debug/app-debug.apk \
+          --test build/app/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
+          --device model=redfin \
+          --timeout 20m
